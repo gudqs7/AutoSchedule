@@ -75,47 +75,62 @@ public class AutoScheduleService {
     public List<Schedule> exhaustive() {
         Integer sumSection = 0;
         List<Schedule> backSchedules = new ArrayList<>();
-        for (Integer week : weeks) {
-            for (Integer dayOfWeek : dayOfWeeks) {
-                for (Integer section : sections) {
-                    sumSection++;
-                    LessonTask lessonTask = getLessonTaskByHourIndex(sumSection);
-                    ClassRoom classRoom = getClassRoomByHourIndex(sumSection);
-                    if (lessonTask == null) {
-                        System.out.println(" 教学班已排完 ");
-                        return backSchedules;
-                    }
-                    if (classRoom == null) {
-                        System.out.println(" 教室已排完 ");
-                        return backSchedules;
-                    }
-                    Schedule schedule = new Schedule();
-                    schedule.setScheduleName("第" + week + "周第" + dayOfWeek + "天第" + section + "节" + lessonTask.getLessonTaskName());
-                    schedule.setWeek(week);
-                    schedule.setDayOfWeek(dayOfWeek);
-                    schedule.setSection(section);
-                    schedule.setClassRoomId(classRoom.getClassRoomId());
-                    schedule.setLessonTaskId(lessonTask.getLessonTaskId());
-                    backSchedules.add(schedule);
+        for (ClassRoom classRoom : classRooms) {
+            boolean overClassRoom = false;
+            for (Integer week : weeks) {
+                if (overClassRoom) {
+                    break;
                 }
-            }
+                for (Integer dayOfWeek : dayOfWeeks) {
+                    if (overClassRoom) {
+                        break;
+                    }
+                    for (Integer section : sections) {
+                        sumSection++;
+                        LessonTask lessonTask = getLessonTaskByHourIndex(sumSection);
+                        if (lessonTask == null) {
+                            System.out.println(" 教学班已排完 ");
+                            return backSchedules;
+                        }
+                        if (isOverClassRoom(sumSection, classRoom)) {
+                            System.out.println(classRoom.getClassRoomName() + "号教室已排完 ");
+                            overClassRoom = true;
+                            break;
+                        }
+                        Schedule schedule = new Schedule();
+                        schedule.setScheduleName("第" + week + "周第" + dayOfWeek + "天第" + section + "节" + lessonTask.getLessonTaskName());
+                        schedule.setWeek(week);
+                        schedule.setDayOfWeek(dayOfWeek);
+                        schedule.setSection(section);
+                        schedule.setClassRoomId(classRoom.getClassRoomId());
+                        schedule.setLessonTaskId(lessonTask.getLessonTaskId());
+                        backSchedules.add(schedule);
+                    }
+                }
 
+            }
         }
 
         return backSchedules;
     }
 
-    private ClassRoom getClassRoomByHourIndex(Integer nowSection) {
+    /**
+     * 教室时间是否使用完毕
+     */
+    private boolean isOverClassRoom(Integer nowSection, ClassRoom classRoom2) {
         Integer lessonSum = 0;
         for (ClassRoom classRoom : classRooms) {
             lessonSum += (CLASS_HOUR % SECTION_HOUR == 0 ? (CLASS_HOUR / SECTION_HOUR) : ((CLASS_HOUR / SECTION_HOUR) + 1));
             if (nowSection <= lessonSum) {
-                return classRoom;
+                return !classRoom.equals(classRoom2);
             }
         }
-        return null;
+        return false;
     }
 
+    /**
+     * 根据累计课时(节次) 计算当前轮排教学任务
+     */
     private LessonTask getLessonTaskByHourIndex(Integer nowSection) {
         Integer lessonSum = 0;
         for (LessonTask lessonTask : lessonTasks) {
