@@ -68,7 +68,7 @@ public class AutoScheduleService {
 
     /**
      * 穷举法
-     * 将每个教室每周每天每节次 根据教学任务的课时排满,
+     * 将每个教室 的教室时间 按每周每天每节次 排满课程(即教学任务, 教学任务按顺序轮排, 排满课时换下一个)
      *
      * @return 结果集
      */
@@ -98,7 +98,7 @@ public class AutoScheduleService {
                             break;
                         }
                         Schedule schedule = new Schedule();
-                        schedule.setScheduleName("第" + week + "周第" + dayOfWeek + "天第" + section + "节" + lessonTask.getLessonTaskName());
+                        schedule.setScheduleName(classRoom.getClassRoomName() + "号教室第" + week + "周第" + dayOfWeek + "天第" + section + "节" + lessonTask.getLessonTaskName());
                         schedule.setWeek(week);
                         schedule.setDayOfWeek(dayOfWeek);
                         schedule.setSection(section);
