@@ -14,7 +14,6 @@ public class Lesson {
     private Integer lessonType;
     private String lessonId;
     private String lessonName;
-    private String subjectId;
 
     private Integer hour;
 

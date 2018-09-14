@@ -1,0 +1,72 @@
+[
+  {
+    "lessonTaskId": "1",
+    "lessonTaskName": "语文一班",
+    "lessonId": "1",
+    "lesson": {
+      "lessonType": 0,
+      "lessonId": "1",
+      "lessonName": "语文",
+      "hour": 160
+    },
+    "teacherId": "1",
+    "students": [
+      {
+        "studentId": "1",
+        "studentName": "学生一号",
+        "adminClassId": "一班",
+        "gradeName": "高一",
+        "adminClassName": "高一1班"
+      },
+      {
+        "studentId": "2",
+        "studentName": "学生2号",
+        "adminClassId": "一班",
+        "gradeName": "高一",
+        "adminClassName": "高一1班"
+      },
+      {
+        "studentId": "3",
+        "studentName": "学生3号",
+        "adminClassId": "一班",
+        "gradeName": "高一",
+        "adminClassName": "高一1班"
+      }
+    ]
+  },
+  {
+    "lessonTaskId": "2",
+    "lessonTaskName": "语文二班",
+    "lessonId": "1",
+    "lesson": {
+      "lessonType": 0,
+      "lessonId": "1",
+      "lessonName": "语文",
+      "hour": 160
+    },
+    "teacherId": "2",
+    "students": [
+      {
+        "studentId": "4",
+        "studentName": "学生4号",
+        "adminClassId": "二班",
+        "gradeName": "高一",
+        "adminClassName": "高一2班"
+      },
+      {
+        "studentId": "5",
+        "studentName": "学生5号",
+        "adminClassId": "二班",
+        "gradeName": "高一",
+        "adminClassName": "高一2班"
+      },
+      {
+        "studentId": "6",
+        "studentName": "学生6号",
+        "adminClassId": "二班",
+        "gradeName": "高一",
+        "adminClassName": "高一2班"
+      }
+    ]
+  }
+]

@@ -19,11 +19,11 @@ public class Schedule {
     private String endTime;
 
     private String lessonTaskId;
+    private LessonTask lessonTask;
     private String lessonId;
 
     private String classRoomId;
     private String teacherId;
-    private String studentId;
 
     /**
      * 表记录唯一性:

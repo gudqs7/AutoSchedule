@@ -11,4 +11,8 @@ public class ClassRoom {
     private String classRoomId;
     private String classRoomName;
 
+    public ClassRoom(String classRoomId, String classRoomName) {
+        this.classRoomId = classRoomId;
+        this.classRoomName = classRoomName;
+    }
 }
